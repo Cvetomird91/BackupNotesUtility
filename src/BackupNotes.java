@@ -33,8 +33,7 @@ public class BackupNotes {
 		}
 
 		backup.setConfig("src/paths.properties");		
-		backup.getAvailableBackups(backup);
-		System.out.println();
+		//backup.getAvailableBackups(backup);
 		
 	}
 	
@@ -56,13 +55,14 @@ public class BackupNotes {
 	private void getAvailableBackups(BackupNotes backup) {
 		File backupsDir = new File(backup.BackupsDir);
 		
-		//to do: refactor with try/catch block
-		if(!backupsDir.exists() && !backupsDir.isDirectory()) {
-			String ErrorMessage = "Please attach the backup storage!";
-			System.out.println(ErrorMessage);
-			System.exit(0);
+		try {
+			backupsDir.exists();
+			backupsDir.isDirectory();
+			FileInputStream stream = new FileInputStream(backupsDir);
+		} catch (FileNotFoundException f) {
+			System.out.println(f);
 		}
-		
+
 		File[] availableBackups = backupsDir.listFiles();
 		
 		for (File f : availableBackups) {
