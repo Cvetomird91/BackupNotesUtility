@@ -3,24 +3,23 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class BackupNotes {
-	
-	//private String configFilePath;
-	
-	//http://stackoverflow.com/questions/19674951/reading-ini-file-in-java
-	//properties syntax: https://docs.oracle.com/cd/E23095_01/Platform.93/ATGProgGuide/html/s0204propertiesfileformat01.html
-	
-	//java.util.prefs.Preferences;
-	//new Properties properties = rowProperties.load(new FileInputStream());
-	
-	//http://stackoverflow.com/questions/367706/how-to-parse-command-line-arguments-in-java
+
+	/* 1. Generate new directory name and path
+	 * 2. Get a list of the current files in the notes_directory
+	 * 3. Get available backups
+	 * 4. check if a daily backup is performed, throw error if one is created
+	 * 5. Force backup option
+	 * 6. Parse command line options accordingly
+	 * 7. Generate line count file name - ${LINE_COUNT_FILE}-${DATE}
+	 * 8. Generate diff file
+	 * 9. Generate line counts file
+	 */
 	
 	private String BackupsDir;
 	private String pCloudDir;
 	private String LocalDir;
 
 	public static void main(String[] args) {
-
-		//setConfig("config.ini");
 		
 		BackupNotes backup = new BackupNotes();
 		
@@ -33,7 +32,7 @@ public class BackupNotes {
 		}
 
 		backup.setConfig("src/paths.properties");		
-		//backup.getAvailableBackups(backup);
+		backup.getAvailableBackups(backup);
 		
 	}
 	
@@ -74,6 +73,10 @@ public class BackupNotes {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		Date date = new Date();
 		return dateFormat.format(date);
+	}
+	
+	private String generateFileName(String prefix) {
+		return prefix + this.generateDateString();
 	}
 	
 }
