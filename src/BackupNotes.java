@@ -13,12 +13,13 @@ public class BackupNotes {
 	 * 6. Parse command line options accordingly
 	 * 7. Generate line count file name - ${LINE_COUNT_FILE}-${DATE}
 	 * 8. Generate diff file
-	 * 9. Generate line counts file
+	 * 9. Generate line counts file name
 	 */
 	
 	private String BackupsDir;
 	private String pCloudDir;
 	private String LocalDir;
+	private String Properties = "src/paths.properties";
 
 	public static void main(String[] args) {
 		
@@ -27,7 +28,7 @@ public class BackupNotes {
 		Properties properties = new Properties();
 
 		try {
-			properties.load(new FileInputStream("src/paths.properties"));
+			properties.load(new FileInputStream(backup.Properties));
 		} catch (IOException e){
 			System.out.println(e);
 		}
@@ -41,7 +42,7 @@ public class BackupNotes {
 		Properties properties = new Properties();
 		
 		try {
-			properties.load(new FileInputStream("src/paths.properties"));
+			properties.load(new FileInputStream(this.Properties));
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -94,7 +95,8 @@ public class BackupNotes {
 
 		//return lines;
 		 
-	*/return 1;
+	*/
+		return 1;
 	}
 	
 	private File[] getNotesFiles(String notesPath) {
