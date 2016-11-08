@@ -27,13 +27,7 @@ public class BackupNotes {
 		
 		Properties properties = new Properties();
 
-		try {
-			properties.load(new FileInputStream(backup.Properties));
-		} catch (IOException e){
-			System.out.println(e);
-		}
-
-		backup.setConfig("src/paths.properties");		
+		backup.setConfig(backup.Properties);		
 		backup.getAvailableBackups(backup);
 
 	}
@@ -102,6 +96,8 @@ public class BackupNotes {
 	private File[] getNotesFiles(String notesPath) {
 		File folder = new File(notesPath);
 		File[] listOfFiles = folder.listFiles();
+		
+		return listOfFiles;
 	}
 	
 }
