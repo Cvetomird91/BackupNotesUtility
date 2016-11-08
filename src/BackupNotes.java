@@ -4,7 +4,8 @@ import java.util.*;
 
 public class BackupNotes {
 
-	/* 1. Generate new directory name and path
+	/* 
+	 * 1. Generate new directory name and path
 	 * 2. Get a list of the current files in the notes_directory
 	 * 3. Get available backups
 	 * 4. check if a daily backup is performed, throw error if one is created
@@ -33,7 +34,7 @@ public class BackupNotes {
 
 		backup.setConfig("src/paths.properties");		
 		backup.getAvailableBackups(backup);
-		
+
 	}
 	
 	private void setConfig(String configPath) {
@@ -67,6 +68,7 @@ public class BackupNotes {
 		for (File f : availableBackups) {
 			System.out.println(f.getName());
 		}
+
 	}
 	
 	private String generateDateString() {
@@ -77,6 +79,27 @@ public class BackupNotes {
 	
 	private String generateFileName(String prefix) {
 		return prefix + this.generateDateString();
+	}
+	
+	private int getLineCount(String filepath) {
+	/*
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(filepath));
+			int lines = 0;
+			while (reader.readline() != null) lines++;
+			reader.close();
+		} catch (IOException io) {
+			System.out.println(io);
+		}
+
+		//return lines;
+		 
+	*/return 1;
+	}
+	
+	private File[] getNotesFiles(String notesPath) {
+		File folder = new File(notesPath);
+		File[] listOfFiles = folder.listFiles();
 	}
 	
 }
