@@ -4,7 +4,7 @@ import java.util.*;
 
 public class BackupNotes {
 
-	/* 
+	/*
 	 * 1. Generate new directory name and path
 	 * 2. Get a list of the current files in the notes_directory
 	 * 3. Get available backups
@@ -14,46 +14,49 @@ public class BackupNotes {
 	 * 7. Generate line count file name - ${LINE_COUNT_FILE}-${DATE}
 	 * 8. Generate diff file
 	 * 9. Generate line counts file name
+	 * 10. Create a service
+	 * 11. Port to Windows
+	 * 12. Add logger functionality
 	 */
-	
+
 	private String BackupsDir;
 	private String pCloudDir;
 	private String LocalDir;
 	private String Properties = "src/paths.properties";
 
 	public static void main(String[] args) {
-		
+
 		BackupNotes backup = new BackupNotes();
-		
+
 		Properties properties = new Properties();
 
-		backup.setConfig(backup.Properties);		
+		backup.setConfig(backup.Properties);
 		backup.getAvailableBackups(backup);
 
 	}
-	
+
 	private void setConfig(String configPath) {
 		Properties properties = new Properties();
-		
+
 		try {
 			properties.load(new FileInputStream(this.Properties));
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		
+
 		String userHome = System.getProperty("user.home");
-		
+
 		System.out.println(userHome);
-		
+
 		this.BackupsDir = userHome + properties.getProperty("backups_dir");
 		this.pCloudDir = userHome + properties.getProperty("pcloud_dir");
 		this.LocalDir = userHome + properties.getProperty("local_dir");
 
 	}
-	
+
 	private void getAvailableBackups(BackupNotes backup) {
 		File backupsDir = new File(backup.BackupsDir);
-		
+
 		try {
 			backupsDir.exists();
 			backupsDir.isDirectory();
@@ -63,23 +66,23 @@ public class BackupNotes {
 		}
 
 		File[] availableBackups = backupsDir.listFiles();
-		
+
 		for (File f : availableBackups) {
 			System.out.println(f.getName());
 		}
 
 	}
-	
+
 	private String generateDateString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
-	
+
 	private String generateFileName(String prefix) {
 		return prefix + this.generateDateString();
 	}
-	
+
 	private int getLineCount(String filepath) {
 	/*
 		try {
@@ -92,16 +95,16 @@ public class BackupNotes {
 		}
 
 		//return lines;
-		 
+
 	*/
 		return 1;
 	}
-	
+
 	private File[] getNotesFiles(String notesPath) {
 		File folder = new File(notesPath);
 		File[] listOfFiles = folder.listFiles();
-		
+
 		return listOfFiles;
 	}
-	
+
 }
