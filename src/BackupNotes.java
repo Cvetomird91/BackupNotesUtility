@@ -46,8 +46,6 @@ public class BackupNotes {
 
 		String userHome = System.getProperty("user.home");
 
-		System.out.println(userHome);
-
 		this.BackupsDir = userHome + properties.getProperty("backups_dir");
 		this.pCloudDir = userHome + properties.getProperty("pcloud_dir");
 		this.LocalDir = userHome + properties.getProperty("local_dir");
