@@ -14,7 +14,7 @@ public class BackupNotes {
 	 * 7. Generate line count file name - ${LINE_COUNT_FILE}-${DATE}
 	 * 8. Generate diff file
 	 * 9. Generate line counts file name
-	 * 10. Create a service
+	 * 10. Create it as a service
 	 * 11. Port to Windows
 	 * 12. Add logger functionality
 	 */
@@ -28,10 +28,11 @@ public class BackupNotes {
 
 		BackupNotes backup = new BackupNotes();
 
-		Properties properties = new Properties();
-
 		backup.setConfig(backup.Properties);
 		backup.getAvailableBackups(backup);
+		
+		String newSnapshowDirectory = backup.generateFileName("notes-");
+		String changesFileName = backup.generateFileName("changes-");
 
 	}
 
@@ -72,7 +73,7 @@ public class BackupNotes {
 	}
 
 	private String generateDateString() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
